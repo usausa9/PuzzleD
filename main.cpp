@@ -1,4 +1,6 @@
 #include "DxLib.h"
+//#include "Board.h"
+#include "KeyBoardInput.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "業種研究_02";
@@ -30,6 +32,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	// 画面の背景色を設定する
 	SetBackgroundColor(0x00, 0x00, 0x00);
 
+	SetMouseDispFlag(FALSE);
+
+	int MouseX, MouseY;
+
 	// DXlibの初期化
 	if (DxLib_Init() == -1) { return -1; }
 
@@ -41,18 +47,20 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	// ゲームループで使う変数の宣言
 
+	KeyboardInput key;
 
-	// 最新のキーボード情報用
-	char keys[256] = {0};
+	const int C_White = GetColor(255, 255, 255);
 
-	// 1ループ(フレーム)前のキーボード情報
-	char prev[256] = {0};
+	bool isClick = false;
 
 	// ゲームループ
 	while (true) {
-		// 最新のキーボード情報だったものは1フレーム前のキーボード情報として保存
-		// 最新のキーボード情報を取得
-		GetHitKeyStateAll(keys);
+
+		key.Update();
+
+		// マウスの位置を取得
+		GetMousePoint(&MouseX, &MouseY);
+
 
 		// 画面クリア
 		ClearDrawScreen();
@@ -60,8 +68,15 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		// 更新処理
 
+		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)	isClick = TRUE;
+		else											isClick = FALSE;
 
 		// 描画処理
+		DrawCircle(MouseX, MouseY, 12, C_White);
+
+		DrawFormatString(0, 0, C_White, "MouseX : %d", MouseX);
+		DrawFormatString(0, 20, C_White, "MouseY : %d", MouseY);
+		DrawFormatString(0, 60, C_White, "isClick : %d", isClick);
 
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
