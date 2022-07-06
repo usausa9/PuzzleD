@@ -4,6 +4,7 @@
 #include "MouseInput.h"
 
 int isDrag = false;
+Position grabDrop = MouseInput::GetBoardPos();
 
 int DropBoard[boardYNum][boardXNum]
 {
@@ -72,8 +73,7 @@ void DrawDrop()
 
 void DropChange()
 {
-	Position grabDrop = MouseInput::GetBoardPos();
-
+	
 	if (MouseInput::GetClick() == 1)
 	{
 		isDrag = true;
@@ -83,17 +83,25 @@ void DropChange()
 		isDrag = false;
 	}
 
-	if (grabDrop.x != MouseInput::GetBoardPos().x || grabDrop.y != MouseInput::GetBoardPos().y)
+	if (isDrag == 1 && grabDrop.x >= 0 && grabDrop.y >= 0)
 	{
-		int stayDate;
-		stayDate = DropBoard[MouseInput::GetBoardPos().y][MouseInput::GetBoardPos().x];
+		if (grabDrop.x != MouseInput::GetBoardPos().x || grabDrop.y != MouseInput::GetBoardPos().y)
+		{
+			int stayDate;
+			stayDate = DropBoard[MouseInput::GetBoardPos().y][MouseInput::GetBoardPos().x];
 
-		DropBoard[MouseInput::GetBoardPos().y][MouseInput::GetBoardPos().x] = DropBoard[grabDrop.y][grabDrop.x];
-		DropBoard[grabDrop.y][grabDrop.x] = stayDate;
+			DropBoard[MouseInput::GetBoardPos().y][MouseInput::GetBoardPos().x] = DropBoard[grabDrop.y][grabDrop.x];
+			DropBoard[grabDrop.y][grabDrop.x] = stayDate;
+		}
 	}
 
 	if (isDrag == 1)
 	{
 		grabDrop = MouseInput::GetBoardPos();
+	}
+
+	if (isDrag == 0)
+	{
+		grabDrop = {-1,-1};
 	}
 }
