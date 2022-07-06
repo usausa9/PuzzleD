@@ -48,7 +48,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	LoadPic();
 
-
 	// ゲームループで使う変数の宣言
 
 	const int C_White = GetColor(255, 255, 255);
@@ -111,6 +110,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	}
 
 	DeletePic();
+
 	// Dxライブラリ終了処理
 	DxLib_End();
 

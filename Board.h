@@ -20,7 +20,7 @@ enum DropDate
 	kMaxDate
 };
 
-const int BaseMap[5][6]
+const int BaseMap[boardYNum][boardXNum]
 {
 	{0,1,0,1,0,1},
 	{1,0,1,0,1,0},
@@ -29,23 +29,9 @@ const int BaseMap[5][6]
 	{0,1,0,1,0,1},
 };
 
-const int DropBoard[5][6]
-{
-	{1,4,2,0,4,3},
-	{0,0,5,3,3,2},
-	{2,0,1,0,2,5},
-	{2,4,2,1,1,4},
-	{5,0,1,5,5,3},
-};
+extern int DropBoard[boardYNum][boardXNum];
 
 void DrawBase();
 void DrawDrop();
 
 void DropChange();
-
-//
-//const int board[boardYNum][boardXNum] = 
-//{
-//	{HI }
-//	
-//}

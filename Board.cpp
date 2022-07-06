@@ -5,6 +5,15 @@
 
 int isDrag = false;
 
+int DropBoard[boardYNum][boardXNum]
+{
+	{1,4,2,0,4,3},
+	{0,0,5,3,3,2},
+	{2,0,1,0,2,5},
+	{2,4,2,1,1,4},
+	{5,0,1,5,5,3},
+};
+
 void DrawBase()
 {
 	for (int x = 0; x < boardXNum; x++)
@@ -63,7 +72,7 @@ void DrawDrop()
 
 void DropChange()
 {
-	Position grabDrop;
+	Position grabDrop = MouseInput::GetBoardPos();
 
 	if (MouseInput::GetClick() == 1)
 	{
@@ -72,6 +81,15 @@ void DropChange()
 	if (MouseInput::GetClick() == 0)
 	{
 		isDrag = false;
+	}
+
+	if (grabDrop.x != MouseInput::GetBoardPos().x || grabDrop.y != MouseInput::GetBoardPos().y)
+	{
+		int stayDate;
+		stayDate = DropBoard[MouseInput::GetBoardPos().y][MouseInput::GetBoardPos().x];
+
+		DropBoard[MouseInput::GetBoardPos().y][MouseInput::GetBoardPos().x] = DropBoard[grabDrop.y][grabDrop.x];
+		DropBoard[grabDrop.y][grabDrop.x] = stayDate;
 	}
 
 	if (isDrag == 1)
