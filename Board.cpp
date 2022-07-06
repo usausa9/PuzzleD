@@ -1,6 +1,9 @@
 #include "Board.h"
 #include "DxLib.h"
 #include "Resource.h"
+#include "MouseInput.h"
+
+int isDrag = false;
 
 void DrawBase()
 {
@@ -60,5 +63,19 @@ void DrawDrop()
 
 void DropChange()
 {
+	Position grabDrop;
 
+	if (MouseInput::GetClick() == 1)
+	{
+		isDrag = true;
+	}
+	if (MouseInput::GetClick() == 0)
+	{
+		isDrag = false;
+	}
+
+	if (isDrag == 1)
+	{
+		grabDrop = MouseInput::GetBoardPos();
+	}
 }

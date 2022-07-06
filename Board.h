@@ -6,6 +6,8 @@ const int cellSize = 100;
 const int boardXNum = 6;
 const int boardYNum = 5;
 
+extern int isDrag;
+
 enum DropDate
 {
 	HI,

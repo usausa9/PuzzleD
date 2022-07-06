@@ -46,7 +46,7 @@ int MouseInput::GetMapY()
 	return GetInstance()->y / cellSize;
 }
 
-Position MouseInput::GetMapPos()
+Position MouseInput::GetBoardPos()
 {
 	return { GetInstance()->x / cellSize,GetInstance()->y / cellSize };
 }

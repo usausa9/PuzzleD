@@ -31,7 +31,7 @@ public:
 	static int GetMapX();
 	static int GetMapY();
 
-	static Position GetMapPos();
+	static Position GetBoardPos();
 
 	//// ƒL[‚ğ‰Ÿ‚µ‚½uŠÔ
 	//static bool GetKeyTrigger(char key);
