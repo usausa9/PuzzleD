@@ -1,5 +1,6 @@
 #include "DxLib.h"
-//#include "Board.h"
+#include "Board.h"
+#include "Resource.h"
 #include "KeyBoardInput.h"
 
 // ウィンドウのタイトルに表示する文字列
@@ -9,7 +10,7 @@ const char TITLE[] = "業種研究_02";
 const int WIN_WIDTH = 600;
 
 // ウィンドウ縦幅
-const int WIN_HEIGHT = 400;
+const int WIN_HEIGHT = 500;
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine,
                    _In_ int nCmdShow) {
@@ -43,6 +44,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// 画像などのリソースデータの変数宣言と読み込み
+	LoadPic();
 
 
 	// ゲームループで使う変数の宣言
@@ -72,6 +74,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		else											isClick = FALSE;
 
 		// 描画処理
+		DrawBase();
+
 		DrawCircle(MouseX, MouseY, 12, C_White);
 
 		DrawFormatString(0, 0, C_White, "MouseX : %d", MouseX);
@@ -95,6 +99,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			break;
 		}
 	}
+
+	DeletePic();
 	// Dxライブラリ終了処理
 	DxLib_End();
 

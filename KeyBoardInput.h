@@ -24,10 +24,6 @@ public:
 	// ‰¡“ü—Í‚Å-1,0,1‚ğ•Ô‚·ŠÖ”(speed‚ÆÏZ‚·‚é‚Æãè‚­g‚¦‚é)
 	static int GetInputHorizontal();
 
-	static int GetInputHorizontalArrow();
-
 	// c“ü—Í‚Å-1,0,1‚ğ•Ô‚·ŠÖ”(speed‚ÆÏZ‚·‚é‚Æãè‚­g‚¦‚é)
 	static int GetInputVertital();
-
-	static int GetInputVertitalArrow();
 };
