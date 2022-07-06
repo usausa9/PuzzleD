@@ -2,6 +2,7 @@
 #include "Board.h"
 #include "Resource.h"
 #include "KeyBoardInput.h"
+#include "MouseInput.h"
 
 // ウィンドウのタイトルに表示する文字列
 const char TITLE[] = "業種研究_02";
@@ -35,7 +36,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	SetMouseDispFlag(FALSE);
 
-	int MouseX, MouseY;
+	//int MouseX, MouseY;
 
 	// DXlibの初期化
 	if (DxLib_Init() == -1) { return -1; }
@@ -44,24 +45,23 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// 画像などのリソースデータの変数宣言と読み込み
+
 	LoadPic();
 
 
 	// ゲームループで使う変数の宣言
 
-	KeyboardInput key;
-
 	const int C_White = GetColor(255, 255, 255);
-
-	bool isClick = false;
+	const int C_Red = GetColor(225, 30, 30);
 
 	// ゲームループ
 	while (true) {
 
-		key.Update();
+		KeyboardInput::Update();
+		MouseInput::Update();
 
-		// マウスの位置を取得
-		GetMousePoint(&MouseX, &MouseY);
+		//// マウスの位置を取得
+		//GetMousePoint(&MouseX, &MouseY);
 
 
 		// 画面クリア
@@ -70,18 +70,23 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		// 更新処理
 
-		if ((GetMouseInput() & MOUSE_INPUT_LEFT) != 0)	isClick = TRUE;
-		else											isClick = FALSE;
-
 		// 描画処理
 		DrawBase();
+		DrawDrop();
 
-		DrawCircle(MouseX, MouseY, 12, C_White);
+		DrawFormatString(0, 0, C_White, "MouseX : %d", MouseInput::GetX());
+		DrawFormatString(0, 20, C_White, "MouseY : %d", MouseInput::GetY());
+		DrawFormatString(0, 60, C_White, "isClick : %d", MouseInput::GetClick());
 
-		DrawFormatString(0, 0, C_White, "MouseX : %d", MouseX);
-		DrawFormatString(0, 20, C_White, "MouseY : %d", MouseY);
-		DrawFormatString(0, 60, C_White, "isClick : %d", isClick);
-
+		if (MouseInput::GetClick() == true)
+		{
+			DrawCircle(MouseInput::GetX(), MouseInput::GetY(), 12, C_Red);
+		}
+		else if (MouseInput::GetClick() == 0)
+		{
+			DrawCircle(MouseInput::GetX(), MouseInput::GetY(), 12, C_White);
+		}
+		
 		//---------  ここまでにプログラムを記述  ---------//
 		// (ダブルバッファ)裏面
 		ScreenFlip();
