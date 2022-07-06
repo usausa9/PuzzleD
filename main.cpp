@@ -78,6 +78,11 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		DrawFormatString(0, 20, C_White, "MouseY : %d", MouseInput::GetY());
 		DrawFormatString(0, 60, C_White, "isClick : %d", MouseInput::GetClick());
 
+		DrawFormatString(0, 100, C_White, "MouseMapX : %d", MouseInput::GetMapX());
+		DrawFormatString(0, 120, C_White, "MouseMapY : %d", MouseInput::GetMapY());
+		DrawFormatString(0, 140, C_White, "MouseMapX : %d", MouseInput::GetMapPos().x);
+		DrawFormatString(0, 160, C_White, "MouseMapY : %d", MouseInput::GetMapPos().y);
+
 		if (MouseInput::GetClick() == true)
 		{
 			DrawCircle(MouseInput::GetX(), MouseInput::GetY(), 12, C_Red);
